@@ -12,11 +12,11 @@ app.get('/', (req, res) => {
 });
 app.get('/test', (req, res) => {
   console.log("Test route hit");
-  res.send("Test route response");
+  res.send({ message: "Test route response" });
 });
 
 // Start Server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
-  console.log("server os up hoes");
+  console.log("server is up hoes");
 });

@@ -9,7 +9,7 @@ const handleButtonPress=async ()=>{
   try {
     const response=await fetch(`${backendPort}/test`)
     const data =await response.json()
-    console.log(data.message)
+    console.log(data)
     console.log("api is working i guess");
 
   } catch (error) {
