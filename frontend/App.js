@@ -1,5 +1,5 @@
 const backendPort="https://track-app-bu6z.onrender.com";
-import LocTracker from './helpers/locTracker.helper';
+import LocTracker from './helpers/locTracker.helper.js';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View ,Button} from 'react-native';
 
