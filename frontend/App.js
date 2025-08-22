@@ -1,5 +1,5 @@
 const backendPort="https://track-app-bu6z.onrender.com";
-
+import LocTracker from './helpers/locTracker.helper';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View ,Button} from 'react-native';
 
@@ -15,24 +15,12 @@ const handleButtonPress=async ()=>{
   } catch (error) {
     console.error("Error fetching data:", error);
   }
-
-
 }
 
 return (
-    <View style={styles.container}>
-      <Text>lol nigga</Text>
-      <Button title="TestAPI" onPress={handleButtonPress} />
-      <StatusBar style="auto" />
-    </View>
+<>
+  <LocTracker/>
+</>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
