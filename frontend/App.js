@@ -1,4 +1,4 @@
-const backendPort="https://treasure-hunt-25.onrender.com";
+const backendPort="https://track-app-bu6z.onrender.com";
 
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View ,Button} from 'react-native';
