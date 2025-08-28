@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, Button } from "react-native";
+import { View, Text, Button } from "react-native";
 import * as Location from "expo-location";
 
 export default function LocTracker() {
-  const [locations, setLocations] = useState([]);
-  const [showLogs, setShowLogs] = useState(true);
+  const [location, setLocation] = useState(null);
+  const [showLocation, setShowLocation] = useState(true);
 
   useEffect(() => {
     let interval;
@@ -18,50 +18,48 @@ export default function LocTracker() {
         accuracy: Location.Accuracy.High,
       });
 
-      const newLog = {
+      setLocation({
         latitude: loc.coords.latitude,
         longitude: loc.coords.longitude,
         timestamp: new Date().toLocaleString(),
-      };
-
-      setLocations((prev) => [...prev, newLog]);
+      });
     };
 
     getLocation();
     interval = setInterval(getLocation, 5000);
+
     return () => clearInterval(interval);
   }, []);
 
   return (
     <View style={{ flex: 1, marginTop: 40, padding: 10 }}>
       <Button
-        title={showLogs ? "Hide Logs" : "Show Logs"}
-        onPress={() => setShowLogs((prev) => !prev)}
+        title={showLocation ? "Hide Location" : "Show Location"}
+        onPress={() => setShowLocation((prev) => !prev)}
       />
 
-      {showLogs && (
-        <>
-          <Text style={{ fontSize: 18, fontWeight: "bold", marginTop: 10 }}>
-            Location Logs:
+      {showLocation && location && (
+        <View
+          style={{
+            marginTop: 20,
+            padding: 15,
+            borderRadius: 10,
+            backgroundColor: "#f0f0f0",
+            shadowColor: "#000",
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.2,
+            shadowRadius: 4,
+            elevation: 5,
+          }}
+        >
+          <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+            Current Location:
           </Text>
-          <FlatList
-            data={locations}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <Text>
-                {item.timestamp} → Lat: {item.latitude}, Lon: {item.longitude}
-              </Text>
-            )}
-          />
-        </>
+          <Text>Time: {location.timestamp}</Text>
+          <Text>Latitude: {location.latitude}</Text>
+          <Text>Longitude: {location.longitude}</Text>
+        </View>
       )}
-      <View style={{ marginTop: 20, marginBottom: 20 }}>
-        <Button
-          title="Clear Logs"
-          onPress={() => setLocations([])}
-        />
-      </View>
     </View>
   );
 }
-
